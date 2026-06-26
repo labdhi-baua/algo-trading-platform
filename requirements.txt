@@ -1,0 +1,16 @@
+pandas
+numpy
+yfinance
+matplotlib
+seaborn
+jupyter
+notebook
+ta
+pyyaml
+pytest
+scikit-learn
+SQLAlchemy
+requests
+schedule
+python-dotenv
+Flask

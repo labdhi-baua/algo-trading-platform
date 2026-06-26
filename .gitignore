@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Ignore these files (don't commit to GitHub)
+__pycache__/
+*.pyc
+venv/
+.env
+*.db
+data/
+results/
+.ipynb_checkpoints/
+.DS_Store
