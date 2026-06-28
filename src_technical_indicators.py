@@ -114,7 +114,8 @@ class TechnicalIndicators:
         tr1 = high - low
         tr2 = abs(high - close.shift(1))
         tr3 = abs(low - close.shift(1))
-        tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+        tr = np.max([tr1, tr2, tr3], axis=0)
+        tr = pd.Series(tr, index=close.index)
         
         # Calculate directional indicators
         atr = tr.rolling(window=period).mean()
@@ -311,6 +312,8 @@ if __name__ == "__main__":
     
     # Download sample data
     df = yf.download("AAPL", start="2023-01-01", end="2024-01-01", progress=False)
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
     
     # Calculate all indicators
     df = TechnicalIndicators.calculate_all_indicators(df)
