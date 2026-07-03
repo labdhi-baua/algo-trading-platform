@@ -37,8 +37,8 @@ from datetime import datetime, timedelta
 """
 Step 2: Download Data for Your Stocks
 """
-# Example: Download 2 years of 4-hour data
-def download_4h_data(ticker, years=2):
+# Example: Download 6 years of 4-hour data
+def download_4h_data(ticker, years=6):
     """Download 4-hour historical data"""
     
     # Yahoo Finance only provides daily data directly
@@ -50,7 +50,10 @@ def download_4h_data(ticker, years=2):
     start_date = end_date - timedelta(days=365*years)
     
     df = yf.download(ticker, start=start_date, end=end_date, progress=False)
-    
+
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+
     print(f"✓ Downloaded {len(df)} days of data for {ticker}")
     print(f"  Date range: {df.index[0].date()} to {df.index[-1].date()}")
     print(f"  Price range: ${df['Close'].min():.2f} - ${df['Close'].max():.2f}")
@@ -58,7 +61,7 @@ def download_4h_data(ticker, years=2):
     return df
 
 # Usage
-aapl_data = download_4h_data("AAPL", years=2)
+aapl_data = download_4h_data("AAPL", years=6)
 
 """
 Step 3: Initialize the Strategy with Optimal Parameters
@@ -180,7 +183,7 @@ if len(buy_signals) > 0:
 EXAMPLE 2: MULTI-STOCK COMPARISON
 """
 
-def backtest_multiple_stocks(tickers, years=2):
+def backtest_multiple_stocks(tickers, years=6):
     """Backtest strategy on multiple stocks"""
     
     print("\n" + "="*80)
@@ -222,7 +225,7 @@ def backtest_multiple_stocks(tickers, years=2):
     return results
 
 # Usage
-results = backtest_multiple_stocks(["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"], years=2)
+results = backtest_multiple_stocks(["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"], years=6)
 
 """
 EXAMPLE 3: PARAMETER OPTIMIZATION
@@ -235,7 +238,7 @@ def optimize_parameters():
     print("PARAMETER OPTIMIZATION TEST")
     print("="*80)
     
-    df = download_4h_data("AAPL", years=2)
+    df = download_4h_data("AAPL", years=6)
     
     # Test different ADX thresholds
     adx_values = [20, 25, 30, 35]
@@ -281,7 +284,7 @@ optimize_parameters()
 EXAMPLE 4: VISUALIZE STRATEGY
 """
 
-def visualize_strategy(ticker, years=2):
+def visualize_strategy(ticker, years=6):
     """Create visual chart of strategy signals"""
     
     df = download_4h_data(ticker, years)
@@ -329,7 +332,7 @@ def visualize_strategy(ticker, years=2):
     plt.show()
 
 # Usage
-visualize_strategy("AAPL", years=2)
+visualize_strategy("AAPL", years=6)
 
 """
 EXAMPLE 5: PAPER TRADING LOG
