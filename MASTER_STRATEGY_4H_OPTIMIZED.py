@@ -313,8 +313,8 @@ class MasterSwingTraderStrategy:
         # Initialize signals
         df['Signal'] = 0
         df['Confidence'] = 0
-        df['Stop_Loss'] = 0
-        df['Take_Profit'] = 0
+        df['Stop_Loss'] = 0.0
+        df['Take_Profit'] = 0.0
         df['Signal_Reason'] = ''
         
         # Process each row
