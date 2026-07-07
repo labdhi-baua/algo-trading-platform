@@ -692,6 +692,9 @@ if __name__ == "__main__":
         try:
             # Download 2+ years of data for robust backtest
             df = yf.download(ticker, start="2022-01-01", end="2024-01-01", progress=False)
+
+            if isinstance(df.columns, pd.MultiIndex):
+                df.columns = df.columns.get_level_values(0)
             
             # Initialize strategy
             strategy = MasterSwingTraderStrategy()
