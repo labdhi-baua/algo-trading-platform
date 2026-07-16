@@ -1,16 +1,27 @@
-pandas
-numpy
-yfinance
-matplotlib
-seaborn
-jupyter
-notebook
-ta
-pyyaml
-pytest
-scikit-learn
-SQLAlchemy
-requests
-schedule
-python-dotenv
-Flask
+# Web Framework
+Flask==2.3.0
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.0.0
+
+# Data & Finance
+pandas>=2.0.0
+numpy>=1.26.0
+yfinance>=0.2.0
+
+# Scheduling
+APScheduler==3.10.0
+
+# Database
+SQLAlchemy==2.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Logging
+colorlog>=6.7.0
+
+# Development
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
